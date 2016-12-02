@@ -8,7 +8,7 @@ pushd `dirname $0` > /dev/null
 BASE=$(pwd -P)
 popd > /dev/null
 
-ISO=/home/sfroemer/Downloads/rhel-server-7.3-x86_64-boot.iso
+ISO=/path/to/rhel-server-7.3-x86_64-boot.iso
 OUT_ISO=${BASE}/rhel-7-rescue.iso
 
 RHEL7RESCUE="${BASE}/build/rhel-7-rescue"
