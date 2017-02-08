@@ -61,7 +61,7 @@ repair_device () {
   dev_name=${device##/dev*/}
   mount_cycle ${device}
   if [ $? -eq 0 ]; then 
-    xfs_repair -n ${device} > xfs-check.${dev_name}.log 2>&1; echo $?
+    xfs_repair -n ${device} > xfs-check.after-repair.${dev_name}.log 2>&1; echo $?
   fi
 }
 
@@ -92,20 +92,4 @@ for DEV in $(list_lvm_lvs); do
   fi
 done
 
-#if [ 0 -eq $ERROR_FOUND ]; then 
-#  #_emergency_action=halt
-#  #exit 1
-#  systemctl isolate poweroff.target
-#else
-#  echo " ##############################################################"
-#  echo " # XFS-ERROR detected. There is one drive with XFS-errors     #"
-#  echo " # Please run 'xfs_repair' manually on all your drives        #"
-#  echo " ##############################################################"
-#  exec sh -i -l
-#fi
-  echo " ##############################################################"
-  echo " # xfs_repair console window.                                 #"
-  echo " ##############################################################"
-  exec sh -i -l
-#
-exit 0
+exit ${ERROR_FOUND}
