@@ -41,7 +41,7 @@ for file in $(rpm -ql coreutils); do mkdir -p ${initrd}$(dirname ${file}); cp -a
 
 # update xfs-progs to 4.5.0-9
 cd ${initrd}
-rpm2cpio ${BASE}/xfsprogs-4.5.0-9.el7_3.x86_64.rpm | cpio -idmv
+rpm2cpio ${BASE}/xfsprogs-4.5.0-9.el7_3.x86_64.rpm | cpio -idmvu
 cd -
 
 # add xfs-check script to initrd
