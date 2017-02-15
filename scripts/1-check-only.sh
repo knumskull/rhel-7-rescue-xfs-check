@@ -65,13 +65,6 @@ repair_device () {
   fi
 }
 
-
-# get boot disk for root filesystem
-#rootvg=$(lvm pvs | grep vda2 | awk -F" " '{print $2}')
-
-# activate volume-groups
-#lvm vgchange -ay ${rootvg}
-
 # 1. repair all xfs volumes, which are no LVM-member
 # 2. 
 ERROR_FOUND=0
@@ -92,20 +85,14 @@ for DEV in $(list_lvm_lvs); do
   fi
 done
 
-#if [ 0 -eq $ERROR_FOUND ]; then 
-#  #_emergency_action=halt
-#  #exit 1
-#  systemctl isolate poweroff.target
-#else
-#  echo " ##############################################################"
-#  echo " # XFS-ERROR detected. There is one drive with XFS-errors     #"
-#  echo " # Please run 'xfs_repair' manually on all your drives        #"
-#  echo " ##############################################################"
-#  exec sh -i -l
-#fi
-  echo " ##############################################################"
-  echo " # xfs_repair console window.                                 #"
-  echo " ##############################################################"
+if [ 0 -eq $ERROR_FOUND ]; then 
+  #_emergency_action=halt
+  #exit 1
+  systemctl isolate poweroff.target
+else
+  echo " ##########################################################"
+  echo " # XFS-ERROR detected. There is one drive with XFS-errors #"
+  echo " # Please run 'xfs_repair' manually on all your drives    #"
+  echo " ##########################################################"
   exec sh -i -l
-#
-exit 0
+fi
