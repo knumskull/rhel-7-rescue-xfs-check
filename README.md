@@ -10,4 +10,4 @@ Scripts for creating a bootable image based on RHEL-7-boot image.
 
 
 # Disclaimer
-There is no warranty on success by using these scripts. You will use these scripts by tour own risk.
+There is no warranty on success by using these scripts. You will use these scripts on your own risk.
